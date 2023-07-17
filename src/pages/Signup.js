@@ -1,9 +1,14 @@
+//auth & redux
+import {connect} from "react-redux";
+import {signupUser} from "./../auth/actions/userActions";
+//import {useHistory} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // styled components
 import {
-    StyledTextInput,
+    //StyledTextInput,
     StyledFormArea, 
     StyledFormButton, 
-    StyledLabel, 
+    //StyledLabel, 
     Avatar, 
     StyledTitle, 
     colors,
@@ -36,18 +41,18 @@ import { ThreeDots } from 'react-loader-spinner'
   //wrapperStyle
  // wrapperClass
 />
-import {connect} from "redux-thunk";
-import {signupUser} from "./../auth/actions/userActions";
-import { UseHistory } from "react-router-dom";
+//import {connect} from "react-redux";
+//import {signupUser} from "./../auth/actions/userActions";
+//import { useHistory } from "react-router-dom";
 
 const Signup = ({signupUser}) => {
-    const history = UseHistory();
+    const navigate = useNavigate();
     return (
         <div>
             <StyledFormArea>
                 <Avatar image={Logo} />
                 <StyledTitle color={colors.theme} size= 
-                {30}>
+                {30} style={{ background: "", color: "white", fontWeight: "bold" }}>
                     Member Signup
                 </StyledTitle>
                 <Formik
@@ -71,8 +76,8 @@ const Signup = ({signupUser}) => {
                         })}
 
                     onSubmit={(values, {setSubmitting, setFieldError}) => {
-                        console.log(values);
-                        signupUser(values, history, setFieldError, setSubmitting)
+                        //console.log(values);
+                        signupUser(values, navigate, setFieldError, setSubmitting)
                     }}
                 >
                     {({isSubmitting}) => (
@@ -80,47 +85,47 @@ const Signup = ({signupUser}) => {
                             <TextInput
                             name="name"
                             type="text"
-                            label="Full Name"
-                            placeholder="Olga Simpson"
+                            label={<span style={{ color: 'white' }}>Full Name</span>}
+                            placeholder="Olaa Simpson"
                             icon= {<FiUser />}
                              />
                              <TextInput
                             name="email"
                             type="text"
-                            label="Email Address"
-                            placeholder="olaga1@gmail.com"
+                            label={<span style={{ color: 'white' }}>Email Address</span>}
+                            placeholder="olaa69@gmail.com"
                             icon= {<FiMail />}
                              />
                              <TextInput
                             name="dateOfBirth"
                             type="date"
-                            label="Date of Birth"
+                            label={<span style={{ color: 'white' }}>Date of Birth</span>}
                             icon= {<FiCalendar />}
                              />
 
                              <TextInput
                             name="repeatPassword"
                             type="password"
-                            label="Repeat Password"
+                            label={<span style={{ color: 'white' }}>Password</span>}
                             placeholder="*************"
                             icon= {<FiLock />}
                              />
                              <TextInput
                             name="password"
                             type="password"
-                            label="Password"
+                            label={<span style={{ color: 'white' }}>Repeat Password</span>}
                             placeholder="*************"
                             icon= {<FiLock />}
                              />
                              <ButtonGroup>
                                {!isSubmitting && (<StyledFormButton 
-                               type="submit">Signup</StyledFormButton>)}
+                               type="submit" style={{ background: "", color: "white", fontWeight: "bold" }}>Signup</StyledFormButton>)}
                                 
                                 {isSubmitting && (
                                     <ThreeDots
                                         //Loader
                                     //type="ThreeDots"
-                                    color={colors.theme}
+                                    color={colors.green}
                                     //height={49}
                                     //width={100}
                                     />
@@ -129,15 +134,15 @@ const Signup = ({signupUser}) => {
                         </Form>
                     )}
                 </Formik>
-                <ExtraText>
-                    Already have an account? <TextLink to="/login">Login</TextLink>
+                <ExtraText style={{ background: "", color: "white", fontWeight: "" }}>
+                    Already have an account? <TextLink to="/login" style={{ background: "", color: "white", fontWeight: "bold" }}>Login</TextLink>
                 </ExtraText>
             </StyledFormArea>
-            <CopyrightText>
-                All right reserved &copy;2022
+            <CopyrightText style={{ background: "", color: "white", fontWeight: "bold" }}>
+                All right reserved &copy;2023
             </CopyrightText>
         </div>
     );
 };
-
+//export default Signup;
 export default connect(null, {signupUser}) (Signup);

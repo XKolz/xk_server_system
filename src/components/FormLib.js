@@ -37,7 +37,7 @@ export const TextInput = ({icon, ...props}) => {
             <StyledIcon>{icon}</StyledIcon>
 
             {
-                props.type == "password" &&
+                props.type === "password" &&
                 <StyledIcon onClick={() => setShow(!show)} right>
                     {show && <FiEye />}
                     {!show && <FiEyeOff />}

@@ -1,9 +1,16 @@
+//auth & redux
+//import;
+import {connect} from "react-redux";
+import {loginUser} from "./../auth/actions/userActions";
+//import {useHistory} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 // styled components
 import {
-    StyledTextInput,
+    //StyledTextInput,
     StyledFormArea, 
     StyledFormButton, 
-    StyledLabel, 
+    //StyledLabel, 
     Avatar, 
     StyledTitle, 
     colors,
@@ -35,20 +42,17 @@ import { ThreeDots } from 'react-loader-spinner'
   ariaLabel="loading"
 />
 
-//auth & redux
-import {connect} from "redux-thunk";
-import {loginUser} from "./../auth/actions/userActions";
-import { UseHistory } from "react-router-dom";
 
 
 const Login = ({loginUser}) => {
-    const history = UseHistory();
+    const navigate = useNavigate();
+    //const history = useHistory();
     return (
         <div>
             <StyledFormArea>
                 <Avatar image={Logo} />
                 <StyledTitle color={colors.theme} size= 
-                {30}>
+                {30} style={{ background: "", color: "white", fontWeight: "bold" }}>
                     Member Login
                 </StyledTitle>
                 <Formik
@@ -67,7 +71,7 @@ const Login = ({loginUser}) => {
 
                     onSubmit={(values, {setSubmitting, setFieldError}) => {
                         //console.log(values);
-                        loginUser(values, history, setFieldError, setSubmitting)
+                        loginUser(values, navigate, setFieldError, setSubmitting)
                     }}
                 >
                     {({isSubmitting}) => (
@@ -75,27 +79,30 @@ const Login = ({loginUser}) => {
                             <TextInput
                             name="email"
                             type="text"
-                            label="Email Address"
-                            placeholder="olaga1@gmail.com"
+                            label={<span style={{ color: 'white' }}>Email Address</span>}
+                            placeholder="olaa69@gmail.com"
                             icon= {<FiMail />}
                              />
 
                              <TextInput
                             name="password"
                             type="password"
-                            label="Password"
+                            label={<span style={{ color: 'white' }}>Password</span>}
                             placeholder="*************"
                             icon= {<FiLock />}
                              />
+                             <ExtraText > <TextLink to="#" style={{ background: "", color: "white", fontWeight: "bold",display: 'flex', justifyContent: 'flex-end', marginTop: '-15px', }}>Forgot Password?</TextLink>
+                </ExtraText>
+                             
                              <ButtonGroup>
                                {!isSubmitting && (<StyledFormButton 
-                               type="submit">Login</StyledFormButton>)}
+                               type="submit" style={{ background: "", color: "white", fontWeight: "bold" }} >Login</StyledFormButton>)}
                                 
                                 {isSubmitting && (
                                     <ThreeDots
                                         //Loader
                                     //type="ThreeDots"
-                                    color={colors.theme}
+                                    color={colors.green}
                                     //height={49}
                                     //width={100}
                                     />
@@ -104,15 +111,15 @@ const Login = ({loginUser}) => {
                         </Form>
                     )}
                 </Formik>
-                <ExtraText>
-                    New here? <TextLink to="/signup">Signup</TextLink>
+                <ExtraText style={{ background: "", color: "white", fontWeight: "" }}>
+                    New here? <TextLink to="/signup" style={{ background: "", color: "white", fontWeight: "bold" }}>Signup</TextLink>
                 </ExtraText>
             </StyledFormArea>
-            <CopyrightText>
-                All right reserved &copy;2022
+            <CopyrightText style={{ background: "", color: "white", fontWeight: "bold" }}>
+                All right reserved &copy;2023
             </CopyrightText>
         </div>
     );
 };
-
+//export default Login;
 export default  connect(null, {loginUser})(Login);

@@ -82,6 +82,28 @@ justify-content: space-around;
 flex-direction: row;
 margin-top: 25px;
 `;
+
+export const Button = styled.p`
+padding: 10px;
+width: 150px;
+background-color: transparent;
+font-size: 16px;
+border: 3px solid ${colors.primary};
+border-radius: 25px;
+text-decoration: none;
+text-align: center;
+transition: ease-in-out 0.3s;
+outline: 0;
+
+
+
+&:hover{
+    background-color: ${colors.primary};
+    color: ${colors.theme};
+    cursor: pointer;
+    }
+`;
+
 //Input
 export const StyledTextInput = styled.input`
 width: 280px;

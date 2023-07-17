@@ -1,18 +1,35 @@
+import { connect } from 'react-redux';
+import { logoutUser } from '../auth/actions/userActions';
+import { useNavigate } from 'react-router-dom';
+
 import { 
     StyledTitle, 
-    StyledSubTitle, 
+    //StyledSubTitle, 
     Avatar, 
-    StyledButton, 
+    //StyledButton,
+    Button, 
     ButtonGroup,
     StyledFormArea, 
-    colors
+    colors,
+    ExtraText
 } 
-from './../components/Styles';
+from '../components/Styles';
 
 //Logo
 import Logo from "./../assets/Logo.png";
 
-const Dashboard = () => {
+//auth & redux 
+
+
+const Dashboard = ({logoutUser, user}) => {
+    const navigate = useNavigate();
+
+    // const handleLogout = () => {
+    //     logoutUser(navigate);
+    //   };
+
+    
+
     return (
         <div>
             <div style ={{
@@ -29,14 +46,29 @@ const Dashboard = () => {
                 <Avatar image={Logo} />
             </div>
             <StyledFormArea bg={colors.dark2}>
-            <StyledTitle size={65}>Welcome, User</StyledTitle>
-
+            <StyledTitle size={65}>Welcome, {user.name}</StyledTitle>
+            <ExtraText color={colors.light1} style={{ background: "", color: "white", fontWeight: "bold" }} >{user.email}</ExtraText>
+            <ExtraText color={colors.light1} style={{ background: "", color: "white", fontWeight: "bold" }}>
+                {new Date(user.dateOfBirth).toLocaleDateString()}</ExtraText>
             <ButtonGroup>
-            <StyledButton to="#">Logout</StyledButton>
+            <Button style={{ background: "", color: "slategray", fontWeight: "bold" }} 
+            to="#" onClick={() => logoutUser(navigate)}>Logout</Button>
+            {/* <Button style={{ background: "" }} to="#" onClick={() => logoutUser(navigate)}>Logout</Button> */}
+            {/* <Button className="login-button">Login</Button> */}
+            {/* <StyledButton to="#" onClick={() => logoutUser(navigate)}>Logout</StyledButton> */}
+            {/* <StyledButton onClick={handleLogout}>Logout</StyledButton> */}
+            {/* <button onClick={handleLogout}>Logout</button> */}
+            {/* <StyledButton onClick={logoutUser}>Logout</StyledButton> */}
             </ButtonGroup>
+
             </StyledFormArea>
             
         </div>    
     );
 }
-export default Dashboard;
+const mapStateToProps = ({session}) => ({
+   user: session.user
+})
+
+//export default connect(null, {logoutUser})(Dashboard);
+export default connect(mapStateToProps, {logoutUser})(Dashboard);

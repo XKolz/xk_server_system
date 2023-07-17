@@ -18,9 +18,15 @@ import{
   Routes,
 } from 'react-router-dom';
 
-function App() {
+//auth
+//import AuthRoute from './components/AuthRoute';
+//import BasicRoute from './components/BasicRoute';
+import { connect } from 'react-redux';
+
+function App({checked}) {
   return (
     <Router>
+      {checked && (
     <StyledContainer>
       <Routes>
         <Route exact path="/signup" element={<Signup/>}/>
@@ -29,11 +35,16 @@ function App() {
         <Route exact path="/" element={<Home/>}/>
       </Routes>
     </StyledContainer>
+)}
     </Router>
   );
 }
 
-export default App;
+const mapStateToProps = ({session}) => ({
+  checked: session.checked,
+})
+
+export default connect(mapStateToProps)(App);
 
 /*
 THis works for older react-router-dom

@@ -19,15 +19,15 @@ const Home = () => {
             }}>
                 <Avatar image={Logo} />
             </div>
-            <StyledTitle size={65}>Welcome Ghost!
+            <StyledTitle size={37}> Peace of Mind to Communicate Freely
             </StyledTitle>
             <StyledSubTitle size={27}>
-                Feel free to know me.
+            Get help with code & applications from anonymous engineers.
             </StyledSubTitle>
 
             <ButtonGroup>
-            <StyledButton to="/login"> Login </StyledButton>
-            <StyledButton to="/signup">Signup</StyledButton>
+            <StyledButton to="/login" style={{ background: "", color: "slategray", fontWeight: "bold" }}> Login </StyledButton>
+            <StyledButton to="/signup" style={{ background: "", color: "slategray", fontWeight: "bold" }}>Signup</StyledButton>
             </ButtonGroup>
         </div>    
     );
